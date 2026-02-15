@@ -3,7 +3,6 @@ import Banner from '../Banner/Banner'
 import SpeedCheck from '../SpeedCheck/SpeedCheck';
 import Features from '../Features/Features';
 const Home = () => {
-    console.log("fuck");
     return (
         <div>
             <Banner></Banner>

@@ -3,29 +3,53 @@ import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Providers/AuthProvider';
 import { useContext } from 'react';
+import axios from 'axios';
+import Swal from 'sweetalert2';
 
 const SignUp = () => {
-    const {createUser,updateUserProfile}=useContext(AuthContext);
-    const navigate=useNavigate();
+    const { createUser, updateUserProfile } = useContext(AuthContext);
+    const navigate = useNavigate();
     const {
         register,
         handleSubmit,
+        reset,
         formState: { errors },
     } = useForm();
     const onSubmit = (data) => {
-        console.log(data);
-        createUser(data.email,data.password)
-        .then(()=>{
-            updateUserProfile(data.name,data.photoURL)
-            .then(()=>{
-                navigate("/");
+        // console.log(data);
+        createUser(data.email, data.password)
+            .then(() => {
+                const userInfo = {
+                    name: data.name,
+                    photoURL: data.photoURL,
+                    email: data.email,
+                    role: data.role,
+                    isVarified:false,
+                }
+                axios.post('http://localhost:5001/users', userInfo)
+                    .then(res => {
+                        console.log(res);
+                        if (res.data.insertedId) {
+                            reset();
+                            Swal.fire({
+                                position: "top-end",
+                                icon: "success",
+                                title: "User created successfully",
+                                showConfirmButton: false,
+                                timer: 1500
+                            });
+                        }
+                    })
+                updateUserProfile(data.name, data.photoURL)
+                    .then(() => {
+                        navigate("/");
+                    })
+                    .catch(error => console.log(error));
             })
-            .catch(error=>console.log(error));
-        })
     }
     return (
         <>
-            
+
             <div className="hero bg-base-200 min-h-screen">
                 <div className="hero-content flex-col lg:flex-row-reverse">
                     <div className="text-center lg:text-left">
@@ -76,7 +100,7 @@ const SignUp = () => {
                                     <a href="#" className="label-text-alt link link-hover">Forgot password?</a>
                                 </label>
                             </div>
-                            <select defaultValue="Pick a role" className="select select-success">
+                            <select {...register("role")} defaultValue="Pick a role" className="select select-success">
                                 <option disabled={true}>Pick a role</option>
                                 <option>Employee</option>
                                 <option>HR</option>

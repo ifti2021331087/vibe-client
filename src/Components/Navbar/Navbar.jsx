@@ -15,7 +15,7 @@ const Navbar = () => {
                 </ul>
             </details>
         </li>
-        <li><a>Item 3</a></li>
+        <li><Link to="/dashboard">Dashboard</Link></li>
     </>
     return (
         <div className="navbar bg-base-100 shadow-sm relative z-50">
@@ -56,10 +56,10 @@ const Navbar = () => {
                                     className="menu menu-sm dropdown-content bg-base-100 rounded-box z-10 mt-3 w-52 p-2 shadow"
                                 >
                                     <li>
-                                        <a className="justify-between">
+                                        <NavLink to="/profile" className="justify-between">
                                             Profile
                                             <span className="badge">New</span>
-                                        </a>
+                                        </NavLink>
                                     </li>
                                     <li><a>Settings</a></li>
                                     <li><a onClick={logOut}>Logout</a></li>
