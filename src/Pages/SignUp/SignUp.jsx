@@ -3,8 +3,8 @@ import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Providers/AuthProvider';
 import { useContext } from 'react';
-import axios from 'axios';
 import Swal from 'sweetalert2';
+import useAxiosSecure from '../../Hooks/useAxiosSecure';
 
 const SignUp = () => {
     const { createUser, updateUserProfile } = useContext(AuthContext);
@@ -15,6 +15,7 @@ const SignUp = () => {
         reset,
         formState: { errors },
     } = useForm();
+    const axiosSecure=useAxiosSecure();
     const onSubmit = (data) => {
         // console.log(data);
         createUser(data.email, data.password)
@@ -24,11 +25,12 @@ const SignUp = () => {
                     photoURL: data.photoURL,
                     email: data.email,
                     role: data.role,
-                    isVarified:false,
+                    isVerified:false,
+                    isFired:false,
                 }
-                axios.post('http://localhost:5001/users', userInfo)
+                axiosSecure.post('http://localhost:5001/users', userInfo)
                     .then(res => {
-                        console.log(res);
+                        // console.log(res);
                         if (res.data.insertedId) {
                             reset();
                             Swal.fire({

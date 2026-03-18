@@ -5,19 +5,20 @@ import "react-datepicker/dist/react-datepicker.css";
 import { AuthContext } from '../../../Providers/AuthProvider';
 import { ImCross } from "react-icons/im";
 import { FaEdit } from "react-icons/fa";
-import axios from 'axios';
 import Swal from 'sweetalert2';
 import useWorks from '../../../Hooks/UseWorks';
+import useAxiosSecure from '../../../Hooks/useAxiosSecure';
 
 const WorkSheet = () => {
     const { user } = useContext(AuthContext);
     const { register, handleSubmit, control, formState: { errors }, reset } = useForm();
     const { works, refetch } = useWorks();
-    console.log(user);
-    console.log(works);
+    const axiosSecure=useAxiosSecure();
+    // console.log(user);
+    // console.log(works);
     const onSubmit = (data) => {
         const newEntry = { ...data, email: user?.email };
-        axios.post('http://localhost:5001/works', newEntry)
+        axiosSecure.post('http://localhost:5001/works', newEntry)
             .then(res => {
                 if (res.data.insertedId) {
                     Swal.fire({

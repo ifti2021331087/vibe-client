@@ -6,7 +6,7 @@ const Navbar = () => {
     const { user, logOut } = useContext(AuthContext);
     const links = <>
         <li><Link to="/">Home</Link></li>
-        <li>
+        {/* <li>
             <details>
                 <summary>Parent</summary>
                 <ul className="p-2 bg-base-100 w-40 z-1">
@@ -14,7 +14,7 @@ const Navbar = () => {
                     <li><a>Submenu 2</a></li>
                 </ul>
             </details>
-        </li>
+        </li> */}
         <li><Link to="/dashboard">Dashboard</Link></li>
     </>
     return (
@@ -30,7 +30,9 @@ const Navbar = () => {
                         {links}
                     </ul>
                 </div>
-                <a className="btn btn-ghost text-xl">daisyUI</a>
+                <Link to="/">
+                    <a className="btn btn-ghost text-xl">Vibe</a>
+                </Link>
             </div>
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal px-1">
@@ -61,7 +63,7 @@ const Navbar = () => {
                                             <span className="badge">New</span>
                                         </NavLink>
                                     </li>
-                                    <li><a>Settings</a></li>
+                                    {/* <li><a>Settings</a></li> */}
                                     <li><a onClick={logOut}>Logout</a></li>
                                 </ul>
                             </div>

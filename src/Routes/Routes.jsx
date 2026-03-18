@@ -13,58 +13,78 @@ import EmployeeList from '../Pages/Dashboard/EmployeeList/EmployeeList';
 import HrPayment from '../Pages/Dashboard/HrPayment/HrPayment';
 import AllEmployeeList from '../Pages/Dashboard/AllEmployeeList/AllEmployeeList';
 import AdminPayment from '../Pages/Dashboard/AdminPayment/AdminPayment';
+import PaymentSuccess from '../Pages/Dashboard/AdminPayment/PaymentSuccess';
+import PaymentCancel from '../Pages/Dashboard/AdminPayment/PaymentCancel';
+import PaymentHistory from '../Pages/Dashboard/PaymentHistory/PaymentHistory';
+import DashboardHome from '../Pages/Dashboard/DashboardHome/DashboardHome';
 
 export const router = createBrowserRouter([
     {
-        path:"/",
-        element:<MainLayout></MainLayout>,
-        children:[
+        path: "/",
+        element: <MainLayout></MainLayout>,
+        children: [
             {
-                path:"/",
-                element:<Home></Home>,
+                path: "/",
+                element: <Home></Home>,
             },
             {
-                path:"role",
-                element:<Role></Role>
+                path: "role",
+                element: <Role></Role>
             },
             {
-                path:"login",
-                element:<Login></Login>,
+                path: "login",
+                element: <Login></Login>,
             },
             {
-                path:"signUp",
-                element:<SignUp></SignUp>,
+                path: "signUp",
+                element: <SignUp></SignUp>,
             },
             {
-                path:"profile",
-                element:<Profile></Profile>
+                path: "profile",
+                element: <Profile></Profile>
             }
 
         ],
     },
     {
-        path:'dashboard',
-        element:<PrivateRoute><Dashboard></Dashboard></PrivateRoute>,
-        children:[
+        path: 'dashboard',
+        element: <PrivateRoute><Dashboard></Dashboard></PrivateRoute>,
+        children: [
             {
-                path:"worksheet",
-                element:<WorkSheet></WorkSheet>
+                index: true, 
+                element: <DashboardHome />
             },
             {
-                path:"employeeList",
-                element:<EmployeeList></EmployeeList>
+                path: "worksheet",
+                element: <WorkSheet></WorkSheet>
             },
             {
-                path:"hrPayment",
-                element:<HrPayment></HrPayment>
+                path: "paymentHistory",
+                element: <PaymentHistory></PaymentHistory>
             },
             {
-                path:"all-employee-list",
-                element:<AllEmployeeList></AllEmployeeList>
+                path: "employeeList",
+                element: <EmployeeList></EmployeeList>
             },
             {
-                path:"adminPayment",
-                element:<AdminPayment></AdminPayment>
+                path: "hrPayment",
+                element: <HrPayment></HrPayment>
+            },
+            {
+                path: "all-employee-list",
+                element: <AllEmployeeList></AllEmployeeList>
+            },
+            {
+                path: "adminPayment",
+                element: <AdminPayment></AdminPayment>
+            },
+            {
+                path: "payment-success",
+                element: <PaymentSuccess></PaymentSuccess>
+            },
+            {
+                path: "payment-cancel",
+                element: <PaymentCancel></PaymentCancel>
             }
         ]
     }

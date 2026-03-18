@@ -1,8 +1,8 @@
-import axios from 'axios';
 import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import Swal from 'sweetalert2';
 import { AuthContext } from '../../Providers/AuthProvider';
+import useAxiosSecure from '../../Hooks/useAxiosSecure';
 
 const Profile = () => {
     const {
@@ -11,15 +11,17 @@ const Profile = () => {
         formState: { errors },
     } = useForm();
     const { user } = useContext(AuthContext);
-    console.log(user);
+    const axiosSecure=useAxiosSecure();
+    // console.log(user);
     const onSubmit = (data) => {
         console.log('Form submitted:', data);
         const updatedDoc = {
             bankAccountNo: data.bankAccountNo,
             designation: data.designation,
-            salary: data.salary
+            salary: data.salary,
+            isVarified:data.isVarified,
         }
-        axios.patch(`http://localhost:5001/users?email=${user.email}`, updatedDoc)
+        axiosSecure.patch(`http://localhost:5001/users?email=${user.email}`, updatedDoc)
             .then(res => {
                 // console.log(res);
                 if(res.data.modifiedCount>0){
