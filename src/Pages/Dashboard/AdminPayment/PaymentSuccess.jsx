@@ -9,7 +9,7 @@ const PaymentSuccess = () => {
     const axiosSecure=useAxiosSecure();
     useEffect(() => {
         if (sessionId && userId) {
-            axiosSecure.get(`http://localhost:5001/payment-info/${sessionId}`)
+            axiosSecure.get(`payment-info/${sessionId}`)
                 .then(res => {
                     const fetchedTransactionId = res.data.transactionId;
                     const updatedDoc={
@@ -17,7 +17,7 @@ const PaymentSuccess = () => {
                         status:"Paid",
                         transactionId:fetchedTransactionId,
                     }
-                    axiosSecure.patch(`http://localhost:5001/userSalary/${userId}`,updatedDoc).
+                    axiosSecure.patch(`userSalary/${userId}`,updatedDoc).
                     then(()=>{
                     })
                 })

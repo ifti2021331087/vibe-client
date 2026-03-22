@@ -28,7 +28,7 @@ const SignUp = () => {
                     isVerified:false,
                     isFired:false,
                 }
-                axiosSecure.post('http://localhost:5001/users', userInfo)
+                axiosSecure.post('users', userInfo)
                     .then(res => {
                         // console.log(res);
                         if (res.data.insertedId) {

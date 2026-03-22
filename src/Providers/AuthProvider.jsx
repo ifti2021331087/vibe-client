@@ -30,23 +30,55 @@ const AuthProvider = ({children}) => {
             photoURL:photo
         });
     }
-    useEffect(()=>{
-        const unsubscribe=onAuthStateChanged(auth,currentUser=>{
+    // useEffect(()=>{
+    //     const unsubscribe=onAuthStateChanged(auth,currentUser=>{
+    //         setUser(currentUser);
+    //         if(currentUser){
+    //             const user_info={email:currentUser.email};
+    //             axiosPublic.post('jwt',user_info)
+    //             .then(res=>{
+    //                 localStorage.setItem('access-token',res.data.token);
+    //             })
+    //         }
+    //         else localStorage.removeItem('access-token');
+    //         setLoading(false);
+    //     })
+    //     return ()=>{
+    //         unsubscribe();
+    //     }
+    // })
+    useEffect(() => {
+        const unsubscribe = onAuthStateChanged(auth, currentUser => {
             setUser(currentUser);
-            if(currentUser){
-                const user_info={email:currentUser.email};
-                axiosPublic.post('http://localhost:5001/jwt',user_info)
-                .then(res=>{
-                    localStorage.setItem('access-token',res.data.token);
-                })
+            
+            if (currentUser) {
+                // Get token and set cookie via backend
+                const userInfo = { email: currentUser.email };
+                axiosPublic.post('/jwt', userInfo)
+                    .then(res => {
+                        if (res.data.success) {
+                            console.log("Cookie set successfully");
+                            setLoading(false);
+                        }
+                    })
+                    .catch(err => {
+                        console.error("JWT Error:", err);
+                        setLoading(false);
+                    });
+            } else {
+                // Clear the cookie on logout
+                axiosPublic.post('/logout')
+                    .then(() => {
+                        console.log("Cookie cleared");
+                        setLoading(false);
+                    });
             }
-            else localStorage.removeItem('access-token');
-            setLoading(false);
-        })
-        return ()=>{
-            unsubscribe();
-        }
-    })
+        });
+
+        return () => {
+            return unsubscribe();
+        };
+    }, [axiosPublic]);
 
     const authInfo={
         user,

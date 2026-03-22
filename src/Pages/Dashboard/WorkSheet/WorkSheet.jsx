@@ -18,7 +18,7 @@ const WorkSheet = () => {
     // console.log(works);
     const onSubmit = (data) => {
         const newEntry = { ...data, email: user?.email };
-        axiosSecure.post('http://localhost:5001/works', newEntry)
+        axiosSecure.post('works', newEntry)
             .then(res => {
                 if (res.data.insertedId) {
                     Swal.fire({

@@ -12,7 +12,7 @@ const AllEmployeeList = () => {
         const newRole = employee.role === "Employee" ? "HR" : "Employee";
         
         try {
-            const response = await axiosSecure.patch(`http://localhost:5001/users?email=${employee.email}`, {
+            const response = await axiosSecure.patch(`users?email=${employee.email}`, {
                 role: newRole
             });
             
@@ -26,7 +26,7 @@ const AllEmployeeList = () => {
     const handleFired=(employee)=>{
         const newIsFired=!employee.isFired;
         try{
-            axiosSecure.patch(`http://localhost:5001/users?email=${employee.email}`,{
+            axiosSecure.patch(`users?email=${employee.email}`,{
                 isFired:newIsFired
             }).then(res=>{
                 if(res.data.modifiedCount>0){

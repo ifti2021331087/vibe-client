@@ -7,6 +7,8 @@ import Role from '../Pages/Role/Role';
 import SignUp from '../Pages/SignUp/SignUp';
 import Profile from '../Pages/Profile/Profile';
 import PrivateRoute from './PrivateRoute';
+import HRRoute from './HRRoute';
+import AdminRoute from './AdminRoute';
 import Dashboard from '../Layouts/Dashboard';
 import WorkSheet from '../Pages/Dashboard/WorkSheet/WorkSheet';
 import EmployeeList from '../Pages/Dashboard/EmployeeList/EmployeeList';
@@ -41,7 +43,7 @@ export const router = createBrowserRouter([
             },
             {
                 path: "profile",
-                element: <Profile></Profile>
+                element: <PrivateRoute><Profile></Profile></PrivateRoute>
             }
 
         ],
@@ -52,39 +54,43 @@ export const router = createBrowserRouter([
         children: [
             {
                 index: true, 
-                element: <DashboardHome />
+                element: <PrivateRoute><DashboardHome /></PrivateRoute>
+                
             },
+            // employee related routes
             {
                 path: "worksheet",
-                element: <WorkSheet></WorkSheet>
+                element: <PrivateRoute><WorkSheet></WorkSheet></PrivateRoute>
             },
             {
                 path: "paymentHistory",
-                element: <PaymentHistory></PaymentHistory>
+                element: <PrivateRoute><PaymentHistory></PaymentHistory></PrivateRoute>
             },
+            // hr related routes
             {
                 path: "employeeList",
-                element: <EmployeeList></EmployeeList>
+                element: <HRRoute><EmployeeList></EmployeeList></HRRoute>
             },
             {
                 path: "hrPayment",
                 element: <HrPayment></HrPayment>
             },
+            // admin related routes
             {
                 path: "all-employee-list",
-                element: <AllEmployeeList></AllEmployeeList>
+                element: <AdminRoute><AllEmployeeList></AllEmployeeList></AdminRoute>
             },
             {
                 path: "adminPayment",
-                element: <AdminPayment></AdminPayment>
+                element: <AdminRoute><AdminPayment></AdminPayment></AdminRoute>
             },
             {
                 path: "payment-success",
-                element: <PaymentSuccess></PaymentSuccess>
+                element: <AdminRoute><PaymentSuccess></PaymentSuccess></AdminRoute>
             },
             {
                 path: "payment-cancel",
-                element: <PaymentCancel></PaymentCancel>
+                element: <AdminRoute><PaymentCancel></PaymentCancel></AdminRoute>
             }
         ]
     }

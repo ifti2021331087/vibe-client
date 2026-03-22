@@ -8,7 +8,7 @@ const PaymentHistory = () => {
     const [transactions, setTransactions] = useState([]);
     const axiosSecure=useAxiosSecure();
     useEffect(()=>{
-        axiosSecure.get(`http://localhost:5001/payroll?email=${user?.email}`)
+        axiosSecure.get(`payroll?email=${user?.email}`)
         .then(res => {
             // console.log(res.data);
             setTransactions(res.data);

@@ -17,7 +17,7 @@ const AdminPayment = () => {
                 month:payingUser.month,
                 year:payingUser.year
             }
-            const res=await axiosSecure.post('http://localhost:5001/create-checkout-session',userData);
+            const res=await axiosSecure.post('create-checkout-session',userData);
             console.log(res.data);
             if(res.data?.id){
                 // eslint-disable-next-line react-hooks/immutability

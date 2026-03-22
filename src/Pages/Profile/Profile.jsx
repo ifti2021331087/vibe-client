@@ -21,7 +21,7 @@ const Profile = () => {
             salary: data.salary,
             isVarified:data.isVarified,
         }
-        axiosSecure.patch(`http://localhost:5001/users?email=${user.email}`, updatedDoc)
+        axiosSecure.patch(`users?email=${user.email}`, updatedDoc)
             .then(res => {
                 // console.log(res);
                 if(res.data.modifiedCount>0){

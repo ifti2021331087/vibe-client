@@ -15,7 +15,7 @@ const EmployeeList = () => {
 
     const handleVerify = async (employee) => {
         try {
-            const response = await axiosSecure.patch(`http://localhost:5001/users?email=${employee.email}`, {
+            const response = await axiosSecure.patch(`users?email=${employee.email}`, {
                 isVerified: !employee.isVerified, 
             });
             
@@ -50,7 +50,7 @@ const EmployeeList = () => {
         }
 
         try {
-            const res = await axiosSecure.post('http://localhost:5001/payroll', userInfo);
+            const res = await axiosSecure.post('payroll', userInfo);
             if (res.data.insertedId) {
                 Swal.fire("Success", "Payment Request Sent", "success");
                 setMonth('');
