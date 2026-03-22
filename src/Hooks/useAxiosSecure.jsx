@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../Providers/AuthProvider';
 
 const axiosSecure=axios.create({
-  baseURL: 'https://vibe-server-six.vercel.app/',
+  baseURL: 'https://vibe-server-ashy.vercel.app/',
   withCredentials:true,
 });
 const useAxiosSecure = () => {

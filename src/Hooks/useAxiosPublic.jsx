@@ -2,7 +2,7 @@ import axios from 'axios';
 import React from 'react';
 
 const axiosPublic = axios.create({
-  baseURL: 'https://vibe-server-six.vercel.app/',
+  baseURL: 'https://vibe-server-ashy.vercel.app/',
   withCredentials: true
 });
 const useAxiosPublic = () => {
